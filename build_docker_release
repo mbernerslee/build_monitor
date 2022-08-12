@@ -6,5 +6,4 @@ set -a
 set +a
 
 docker image build -t build_monitor .
-#docker container run -dp $HTTP_PORT:$HTTP_PORT -e POOL_SIZE -e PORT -e DATABASE_URL -e SECRET_KEY_BASE --network saturn-network  --name saturn elixir/saturn
-#docker container run -dp $HTTP_PORT:$HTTP_PORT -e POOL_SIZE -e PORT -e DATABASE_URL -e SECRET_KEY_BASE  --name build_monitor build_monitor
+docker container run -dp $HTTP_PORT:$HTTP_PORT -e SECRET_KEY_BASE -e HTTP_PORT -e HTTPS_PORT -e PHX_HOST -e POOL_SIZE -e LOG_LEVEL --name build_monitor build_monitor

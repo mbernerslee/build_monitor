@@ -6,4 +6,4 @@ set -a
 set +a
 
 mix phx.digest
-mix release --overwrite
+MIX_ENV=prod mix release --overwrite
