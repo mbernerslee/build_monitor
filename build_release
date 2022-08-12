@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+set -a
+. .secrets.env
+set +a
+
+mix phx.digest
+mix release --overwrite

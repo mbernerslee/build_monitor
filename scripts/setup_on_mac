@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "Installing flyctl..."
+brew install flyctl

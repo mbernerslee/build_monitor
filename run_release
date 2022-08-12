@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+#sudo echo "a prompt for sudo"
+set -a
+. .secrets.env
+set +a
+
+#sudo --preserve-env _build/prod/rel/build_monitor/bin/build_monitor eval "Dave.Release.migrate"
+#sudo --preserve-env _build/prod/rel/build_monitor/bin/build_monitor start >> log_file 2>&1 &
+
+echo "Running build_monitor..."
+#sudo --preserve-env _build/prod/rel/build_monitor/bin/build_monitor start
+_build/prod/rel/build_monitor/bin/build_monitor start
