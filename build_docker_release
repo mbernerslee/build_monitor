@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+set -a
+. .secrets.env
+set +a
+
+docker image build -t build_monitor .
+#docker container run -dp $HTTP_PORT:$HTTP_PORT -e POOL_SIZE -e PORT -e DATABASE_URL -e SECRET_KEY_BASE --network saturn-network  --name saturn elixir/saturn
+#docker container run -dp $HTTP_PORT:$HTTP_PORT -e POOL_SIZE -e PORT -e DATABASE_URL -e SECRET_KEY_BASE  --name build_monitor build_monitor
