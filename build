@@ -7,7 +7,7 @@ echo "Running mix compile..."
 MIX_ENV=test mix compile --warnings-as-errors --force
 echo "Running mix format..."
 mix format --check-formatted
-echo "mix loadconfig config/prod.exs"
+echo "Running mix loadconfig config/prod.exs"
 mix loadconfig config/prod.exs
-echo "mix test"
+echo "Running mix test"
 mix test
