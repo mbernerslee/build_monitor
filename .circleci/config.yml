@@ -27,4 +27,4 @@ jobs:
       # - run: mix ecto.create
       - run: ls -lah
       - run: pwd
-      - run: ./build
+      - run: /root/build_monitor/build
