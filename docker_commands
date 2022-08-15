@@ -1,9 +1,6 @@
-#!/bin/bash
-
-set -e
-set -a
-. .secrets.env
-set +a
-
 docker image build -t build_monitor .
 docker container run -d -p $HTTP_PORT:$HTTP_PORT -p $HTTPS_PORT:$HTTPS_PORT --env-file .secrets.env --name build_monitor build_monitor
+docker exec -it build_monitor /bin/bash
+docker ps -a
+docker container stop build_monitor
+docker container prune

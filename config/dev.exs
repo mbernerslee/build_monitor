@@ -19,7 +19,7 @@ config :build_monitor, BuildMonitor.Repo,
 config :build_monitor, BuildMonitorWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {127, 0, 0, 1}, port: 4000],
+  http: [port: 4000],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
@@ -27,6 +27,12 @@ config :build_monitor, BuildMonitorWeb.Endpoint,
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
     esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+  ],
+  https: [
+    port: 4443,
+    cipher_suite: :strong,
+    keyfile: "priv/cert/selfsigned_key.pem",
+    certfile: "priv/cert/selfsigned.pem"
   ]
 
 # ## SSL Support
@@ -41,13 +47,13 @@ config :build_monitor, BuildMonitorWeb.Endpoint,
 # Run `mix help phx.gen.cert` for more information.
 #
 # The `http:` config above can be replaced with:
+#  https: [
+#    port: 4001,
+#    cipher_suite: :strong,
+#    keyfile: "priv/cert/selfsigned_key.pem",
+#    certfile: "priv/cert/selfsigned.pem"
+#  ]
 #
-#     https: [
-#       port: 4001,
-#       cipher_suite: :strong,
-#       keyfile: "priv/cert/selfsigned_key.pem",
-#       certfile: "priv/cert/selfsigned.pem"
-#     ],
 #
 # If desired, both `http:` and `https:` keys can be
 # configured to run both http and https servers on

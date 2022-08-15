@@ -12,7 +12,7 @@ config :build_monitor,
 
 # Configures the endpoint
 config :build_monitor, BuildMonitorWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host: System.get_env("PHX_HOST") || "localhost"],
   render_errors: [view: BuildMonitorWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: BuildMonitor.PubSub,
   live_view: [signing_salt: "Tzh40It7"]

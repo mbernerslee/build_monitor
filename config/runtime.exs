@@ -59,6 +59,18 @@ if config_env() == :prod do
     String.to_integer(System.get_env("HTTPS_PORT")) ||
       raise "no HTTPS_PORT environment variable was set"
 
+  key_file =
+    System.get_env("KEY_FILE") ||
+      raise """
+      environment variable KEY_FILE is missing.
+      """
+
+  cert_file =
+    System.get_env("CERT_FILE") ||
+      raise """
+      environment variable CERT_FILE is missing.
+      """
+
   config :build_monitor, BuildMonitorWeb.Endpoint,
     url: [host: host, port: https_port],
     http: [
@@ -69,7 +81,12 @@ if config_env() == :prod do
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
       port: http_port
     ],
-    https: [port: https_port],
+    https: [
+      port: https_port,
+      cipher_suite: :strong,
+      keyfile: key_file,
+      certfile: cert_file
+    ],
     secret_key_base: secret_key_base
 
   # ## Configuring the mailer
