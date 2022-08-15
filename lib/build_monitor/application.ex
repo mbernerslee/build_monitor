@@ -15,7 +15,8 @@ defmodule BuildMonitor.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: BuildMonitor.PubSub},
       # Start the Endpoint (http/https)
-      BuildMonitorWeb.Endpoint
+      BuildMonitorWeb.Endpoint,
+      BuildMonitor.Server.child_spec()
       # Start a worker by calling: BuildMonitor.Worker.start_link(arg)
       # {BuildMonitor.Worker, arg}
     ]

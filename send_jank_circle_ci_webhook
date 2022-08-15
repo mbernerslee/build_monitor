@@ -1,0 +1,3 @@
+#!/bin/bash
+
+curl -X POST -H "Content-Type: application/json" -d '{"key":"val"}' localhost:4000/circle-ci
