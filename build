@@ -3,7 +3,11 @@
 mix local.hex --force
 mix local.rebar --force
 mix deps.get
+echo "Running mix compile..."
 MIX_ENV=test mix compile --warnings-as-errors --force
+echo "Running mix format..."
 mix format --check-formatted
+echo "mix loadconfig config/prod.exs"
 mix loadconfig config/prod.exs
+echo "mix test"
 mix test
