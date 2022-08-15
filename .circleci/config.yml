@@ -17,7 +17,7 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/postgres:9.4
 
-    working_directory: ~/build_monitor
+    # working_directory: ~/repo
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
@@ -25,4 +25,4 @@ jobs:
 
       # specify any bash command here prefixed with `run: `
       # - run: mix ecto.create
-      - run: ./build
+      - run: cd ~/build_monitor && ./build
