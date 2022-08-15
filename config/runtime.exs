@@ -51,27 +51,26 @@ if config_env() == :prod do
 
   host = System.get_env("PHX_HOST") || raise "no PHX_HOST environment variable was set"
 
-  http_port =
-    String.to_integer(System.get_env("HTTP_PORT")) ||
-      raise "no HTTP_PORT environment variable was set"
+  unless System.get_env("HTTP_PORT"), do: raise("no HTTP_PORT environment variable was set")
+  http_port = String.to_integer(System.get_env("HTTP_PORT"))
 
-  https_port =
-    String.to_integer(System.get_env("HTTPS_PORT")) ||
-      raise "no HTTPS_PORT environment variable was set"
+  unless System.get_env("HTTPS_PORT"), do: raise("no HTTPS_PORT environment variable was set")
+  https_port = String.to_integer(System.get_env("HTTPS_PORT"))
 
-  key_file =
-    System.get_env("KEY_FILE") ||
-      raise """
-      environment variable KEY_FILE is missing.
-      """
+  # key_file =
+  #  System.get_env("KEY_FILE") ||
+  #    raise """
+  #    environment variable KEY_FILE is missing.
+  #    """
 
-  cert_file =
-    System.get_env("CERT_FILE") ||
-      raise """
-      environment variable CERT_FILE is missing.
-      """
+  # cert_file =
+  #  System.get_env("CERT_FILE") ||
+  #    raise """
+  #    environment variable CERT_FILE is missing.
+  #    """
 
   config :build_monitor, BuildMonitorWeb.Endpoint,
+    force_ssl: [rewrite_on: [:x_forwarded_proto]],
     url: [host: host, port: https_port],
     http: [
       # Enable IPv6 and bind on all interfaces.
@@ -81,13 +80,14 @@ if config_env() == :prod do
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
       port: http_port
     ],
-    https: [
-      port: https_port,
-      cipher_suite: :strong,
-      keyfile: key_file,
-      certfile: cert_file
-    ],
     secret_key_base: secret_key_base
+
+  # https: [
+  #  port: https_port,
+  #  cipher_suite: :strong
+  #  keyfile: key_file,
+  #  certfile: cert_file
+  # ],
 
   # ## Configuring the mailer
   #

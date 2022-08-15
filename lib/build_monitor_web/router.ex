@@ -16,8 +16,12 @@ defmodule BuildMonitorWeb.Router do
 
   scope "/", BuildMonitorWeb do
     pipe_through :browser
+    live "/", DashboardLive.Index, :index
+  end
 
-    get "/", PageController, :index
+  scope "/", BuildMonitorWeb do
+    pipe_through :api
+    post "/circle-ci", PageController, :circle_ci
   end
 
   # Other scopes may use custom stacks.

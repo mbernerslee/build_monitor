@@ -78,3 +78,11 @@ COPY --from=build --chown="${USER}":"${USER}" /app/_build/"${MIX_ENV}"/rel/build
 ENTRYPOINT ["bin/build_monitor"]
 
 CMD ["start"]
+
+# Appended by flyctl
+ENV ECTO_IPV6 true
+ENV ERL_AFLAGS "-proto_dist inet6_tcp"
+
+# Appended by flyctl
+ENV ECTO_IPV6 true
+ENV ERL_AFLAGS "-proto_dist inet6_tcp"

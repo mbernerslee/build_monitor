@@ -34,3 +34,4 @@ build_monitor-*.tar
 npm-debug.log
 /assets/node_modules/
 .secrets.env
+rel/

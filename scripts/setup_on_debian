@@ -1,0 +1,17 @@
+#!/bin/bash
+
+function append_bashrc {
+  LINE=$1
+  FILE=~/.bashrc
+  grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
+}
+
+type flyctlsds &> /dev/null
+if [ $? -eq 0 ]; then
+  echo "Installing flyctl..."
+  curl -L https://fly.io/install.sh | sh
+  append_bashrc 'export FLYCTL_INSTALL="$HOME/.fly"'
+  append_bashrc 'export PATH="$FLYCTL_INSTALL/bin:$PATH"'
+else
+  echo "flyctl already installed"
+fi
