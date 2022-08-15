@@ -26,4 +26,5 @@ jobs:
       # specify any bash command here prefixed with `run: `
       # - run: mix ecto.create
       - run: ls -lah
+      - run: pwd
       - run: ./build
