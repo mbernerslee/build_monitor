@@ -4,7 +4,10 @@
 - brew is installed
 
 # Commands
-build docker release
+build and deploy
+`flyctl deploy`
+
+build docker release locally (not working rn)
 `./build_docker_release`
 
 stop & kill locally running docker container
@@ -12,3 +15,6 @@ stop & kill locally running docker container
 
 list all containers (even no-longer-running ones)
 `docker ps -a`
+
+see fly.io config file at
+`fly.toml`

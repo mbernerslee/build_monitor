@@ -29,6 +29,7 @@ defmodule BuildMonitorWeb.DashboardLive.Index do
           <th>Author</th>
           <th>Committer</th>
           <th>Git Commit Message</th>
+          <th>When?</th>
         </tr>
 
       <%= for build_result <- @build_results do %>
@@ -37,6 +38,7 @@ defmodule BuildMonitorWeb.DashboardLive.Index do
 
             <% %{
              "pipeline" => %{
+               "created_at" => created_at,
                "vcs" => %{
                  "branch" => branch,
                  "commit" => %{
@@ -56,9 +58,11 @@ defmodule BuildMonitorWeb.DashboardLive.Index do
               <td><%= author %></td>
               <td><%= committer %></td>
               <td><%= git_commit_message %></td>
+              <td><%= render_datetime(created_at) %></td>
 
             <% %{
               "pipeline" => %{
+                "created_at" => created_at,
                 "vcs" => %{
                   "branch" => branch,
                   "commit" => %{
@@ -78,9 +82,11 @@ defmodule BuildMonitorWeb.DashboardLive.Index do
               <td><%= author %></td>
               <td><%= committer %></td>
               <td><%= git_commit_message %></td>
+              <td><%= render_datetime(created_at) %></td>
 
             <% %{"type" => "ping"} -> %>
               <td>Test ping!</td>
+              <td>-</td>
               <td>-</td>
               <td>-</td>
               <td>-</td>
@@ -195,5 +201,15 @@ defmodule BuildMonitorWeb.DashboardLive.Index do
     #      "https://app.circleci.com/pipelines/github/mbernerslee/build_monitor/20/workflows/3ebb14db-89ce-4f79-89ca-e7a41cfb85e9"
     #  }
     # }
+  end
+
+  defp render_datetime(datetime) do
+    case DateTime.from_iso8601(datetime) do
+      {:ok, %{year: year, month: month, day: day, hour: hour, minute: minute, second: second}, _} ->
+        "#{year}-#{month}-#{day} #{hour}:#{minute}:#{second}"
+
+      fail ->
+        "oops, failed with #{inspect(fail)}"
+    end
   end
 end
