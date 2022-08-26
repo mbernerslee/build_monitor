@@ -49,7 +49,7 @@ FROM alpine:3.14.2 AS app
 
 ARG MIX_ENV
 
-# install runtime dependencies
+# install runtime dependencies (and also bash)
 RUN apk add --no-cache libstdc++ openssl ncurses-libs bash
 
 ENV USER="elixir"
